@@ -1,0 +1,39 @@
+#include <LiquidCrystal.h>
+LiquidCrystal lcd(12,11,5,4,3,2);
+String dato;
+int sw_1=8;
+int cont=0;
+void setup() {
+   lcd.begin(16,2); 
+Serial.begin(9600); 
+pinMode(sw_1,INPUT);
+}
+
+void loop() {
+  if (Serial.available() > 0) {
+    
+    dato = Serial.readString();
+   
+  }
+if(digitalRead(sw_1)==HIGH){
+  
+int tamano=dato.length();
+ char vector[dato.length()];
+
+
+ for(cont=0;cont<=16;cont++){
+  
+
+  lcd.setCursor(cont,0);
+  delay(300);
+  lcd.print(dato);
+  
+ lcd.setCursor(cont-1,0);
+  lcd.print(' ');
+      
+   
+    }
+    
+  }
+  
+}
