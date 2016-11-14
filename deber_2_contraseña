@@ -1,0 +1,48 @@
+#include <LiquidCrystal.h>
+
+
+LiquidCrystal lcd(12,11,5,4,3,2);
+String dato;
+int sw_1=8;
+
+void setup() {
+   lcd.begin(16,2); 
+Serial.begin(9600); 
+pinMode(sw_1,INPUT);
+Serial.println("****************INGRESE LA CONTRASENA******************");
+}
+
+void loop() {
+
+  
+  if (Serial.available() > 0) {
+    
+    dato = Serial.readString();
+   
+  }
+if(digitalRead(sw_1)==HIGH){
+  
+int tamano=dato.length();
+ char vector[dato.length()];
+
+dato.toCharArray(vector,dato.length());
+  if(dato.equals("PASSWORD")){
+    
+    lcd.setCursor(0,0);
+    lcd.print("CORRECTA");
+       
+    }
+
+    else{
+    lcd.setCursor(0,0);
+    lcd.print("ERRONEA");
+    Serial.println("");
+    Serial.println("INGRESE DE NUEVO SU CONTRASENA");
+    delay(300);
+    }
+  
+  }
+
+    
+  }
+  
